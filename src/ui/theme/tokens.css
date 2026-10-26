@@ -1,7 +1,10 @@
 :root {
   /* Pigment logic: cream paper, warm near-black ink, four inks (spec.md > Look and Feel). */
-  --paper: #f3ead8;
-  --paper-raised: #f8f1e2;
+  --paper: #6ea8ff; /* sky */
+  --paper-raised: #fff4d6; /* cream panel */
+  --coin: #ffd84a;
+  --brick: #b8562a;
+  --brick-dark: #7a3414;
   --ink: #2b2520;
   --ink-soft: #5c5247;
   --madder: #b8423c;
@@ -16,7 +19,8 @@
 
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-body: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
-  --font-label: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-label: 'Press Start 2P', ui-monospace, Menlo, monospace;
+  --font-pixel: 'Press Start 2P', ui-monospace, Menlo, monospace;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -25,5 +29,5 @@
   --space-5: 2.5rem;
   --space-6: 4rem;
 
-  --shadow-paper: 6px 6px 0 rgb(43 37 32 / 0.18);
+  --shadow-paper: 6px 6px 0 var(--ink);
 }

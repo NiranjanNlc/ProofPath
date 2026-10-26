@@ -27,38 +27,37 @@ Loop: **Surprise → Diagnose → Transfer → Reflect** (source: `scope.md > Th
 ## Screens and Layout
 Surfaces, kept to what the journey needs:
 
-- **Landing / opening challenge.** Opens straight into the surprise scenario, not a menu. A short greeting and an inviting call to play, and no topic or level picker in the PoC.
+- **Landing page.** A single no-scroll screen: the problem in one headline ("You passed the quiz. The real project still went blank."), one line of copy, a "Press start" button, and the five levels shown as a path. No topic or level picker in the PoC. Returning learners with saved progress skip it and resume.
 - **Challenge screen** (used for the surprise, remaining challenges, and the transfer challenge). Scenario text, a relevant picture, multiple-choice answers, and submit. Shown here are the progress path (see Look and Feel) and the feedback area for the hint, diagnosis, and reveal.
 - **Results screen.** Initial accuracy, misconceptions addressed, retry outcomes, and transfer performance, backed by evidence from the learner's own answers.
 
-Movement: landing/opening challenge → challenges → transfer challenge → results. Returning mid-session lands on the last saved challenge.
+Movement: landing page → challenges → transfer challenge → results. Returning mid-session lands on the last saved challenge.
 
 ## Look and Feel
-Direction supplied by the learner. The test: could a person plausibly have made this by hand, and does every irregularity follow a rule (same stitch length range, same light direction, same ink set)?
+**Direction (revised):** a pixel-art overworld in the spirit of 8-bit platformer worlds. The earlier hand-crafted paper-and-stitch direction is retired. The test: does every screen read as a level in a small game, with one strict pixel grid, a capped palette, and no generic quiz-app chrome?
 
-**Overall:** minimalistic, handicraft, gamified, and tempting to play. Handicraft means evidence of a hand: bounded irregularity, a visible material, and a few deliberate choices. It is not a texture filter over a standard UI. Every screen should feel like part of a game, not a quiz application.
+**Overall:** minimalistic, gamified, and tempting to play. Take the grammar of classic platformer worlds (HUD, world and level numbers, question blocks, coins, brick ground, a hero hopping along a level path). Do not take Nintendo's characters, names, or assets. All sprites are original.
 
 **Typography**
-- Humanist or soft-serif faces with slight wonk. Hand-lettering for display text only (headings, labels, empty states). Body copy stays a legible text face.
-- Repeated letters should not be identical (contextual alternates or glyph variants).
-- If pixel type is used, it needs a strict grid, integer scaling, and no anti-aliasing blur.
+- Pixel type (Press Start 2P) for headings, labels, the HUD, and buttons: strict grid, integer-friendly sizes, no blur.
+- Body copy and answer text stay a legible text serif (Newsreader). Pixel type is never used for paragraphs.
 
 **Color**
-- Pigment logic: warm cream paper instead of #FFF, warm near-black ink instead of #000.
-- 3–5 inks (muted madder red, indigo, ochre, moss), overprinted with multiply blending.
+- Sky blue ground, cream panels (not #FFF) for reading surfaces, warm near-black ink (not #000) for outlines and shadows.
+- A capped palette: coin yellow, madder red, indigo, ochre, moss, and brick brown for the ground.
 
-**References, and what to take from each**
-- Paper: grain, deckled edges, layered cut-paper with one consistent light source and soft contact shadows.
-- Stitching: dashed borders as running stitch, cross-stitch grid icons, chain-stitch outlines.
-- Hand-drawn maps: wobbly paths, illustrated landmarks, "you are here". The lesson to take is progress as a journey through a place.
-- Mario-world overworld maps: nodes connected by paths, tile grids, strict-grid sprites, and a capped palette. Take the grammar (map as progress, tiles, palette limits), not Nintendo's characters or assets.
+**Surfaces**
+- **Landing:** one screen, no scrolling. Sky, brick ground, two "?" blocks, a HUD ("WORLD 1-1", points), a headline, one line of copy, a "Press start" button, and the five levels 1-1 to 1-5 with the last labelled as the boss (the transfer challenge). A pixel hero hops along the levels.
+- **Challenge and results:** cream panels with thick ink borders and hard offset shadows. Answer options are chunky blocks with yellow lettered tiles. Buttons are yellow pixel buttons that press down.
+- **Progress path:** a coin-yellow path with a node per challenge, coloured by outcome, and a "you are here" marker.
 
 **Technique**
-- Seeded irregularity: each line or stitch differs, but is the same on every render. Low-opacity noise and sparing stop-motion animation (8–12 fps).
-- Crisp underneath: grid, contrast, spacing, and touch targets stay rigorous. Handmade character lives in headings, borders, illustration, and empty states, not in inputs or dense data.
+- Hard shadows and thick borders everywhere, no blur or soft gradients.
+- Stepped animation only (CSS `steps()`), switched off under `prefers-reduced-motion`.
+- Crisp underneath: contrast, spacing, and touch targets stay rigorous.
 
 **Must not look like**
-- Skeuomorphism, handwriting-font body copy, a uniform "sketch filter", Etsy-style kitsch, generic Corporate Memphis or AI watercolor illustration, blurry pixel pastiche, or default-modern tells (pure white/black, uniform 8px cards, glassmorphism, SaaS blue-purple gradients). No accidental sloppiness passed off as charm.
+- Pixel-font body copy, blurry or anti-aliased pixel pastiche, copied Nintendo characters or assets, generic AI-template layouts, or default-modern tells (pure white/black, glassmorphism, soft SaaS gradients). No accidental sloppiness.
 
 ## Features and Behavior
 
@@ -151,5 +150,5 @@ Source: `scope.md > POC Boundary` (the Mario layer is visual only).
 Resolve before `4-spec` unless noted.
 - **How many challenges are in a session?** You said "the remaining challenges" and a final transfer challenge, but not how many. Working assumption: a small fixed number (for example three or four in total), with the last one being the transfer challenge.
 - **Scoring weights.** The results screen shows several parts, but we haven't fixed how they combine into one score (for example how much a first-try correct answer counts vs. a corrected one vs. transfer). Needs a decision before `4-spec`.
-- **Primary visual material.** Your brief lists paper, stitching, hand-drawn map, and Mario-world overworld. Do you want one dominant material, or a blend (for example a hand-drawn overworld map with stitched borders)? Can be settled at design time, but is worth deciding here.
+- **Primary visual material.** Resolved: a pixel-art overworld (see Look and Feel). The earlier paper and stitch direction was dropped.
 - **Progress storage across devices** is not needed for the PoC; can wait.

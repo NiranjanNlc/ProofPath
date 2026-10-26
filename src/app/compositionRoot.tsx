@@ -6,6 +6,7 @@ import type { SessionState, Topic } from '../domain/types';
 import { LocalStorageProgressRepository } from '../persistence/localStorageProgressRepository';
 import { MemoryProgressRepository } from '../persistence/memoryProgressRepository';
 import type { ProgressRepository } from '../persistence/ProgressRepository';
+import { LandingScreen } from '../ui/screens/LandingScreen';
 import { SessionProvider } from '../ui/state/SessionProvider';
 import { App } from './App';
 import { ErrorBoundary } from './ErrorBoundary';
@@ -35,6 +36,7 @@ interface Loaded {
 export function Root() {
   const [loaded, setLoaded] = useState<Loaded | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     contentProvider.getTopic(TOPIC_ID).then(
@@ -49,6 +51,12 @@ export function Root() {
 
   if (error) return <p role="alert">Could not load the challenges: {error}</p>;
   if (!loaded) return null;
+
+  // Returning learners skip the landing page and resume where they left off.
+  const hasProgress = loaded.initialSession.records.length > 0;
+  if (!started && !hasProgress) {
+    return <LandingScreen topic={loaded.topic} onStart={() => setStarted(true)} />;
+  }
 
   return (
     <ErrorBoundary onReset={() => repository.clear()}>

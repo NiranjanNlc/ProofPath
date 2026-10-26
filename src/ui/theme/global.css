@@ -6,7 +6,12 @@
 
 body {
   margin: 0;
-  background: var(--paper);
+  min-height: 100dvh;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 calc(2.5rem - 4px), var(--brick-dark) 0 2.5rem)
+      bottom / 100% 2rem no-repeat fixed,
+    linear-gradient(var(--ink) 0 4px, var(--brick) 4px) bottom / 100% 2rem no-repeat fixed,
+    var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.0625rem;
@@ -15,9 +20,9 @@ body {
 
 h1,
 h2 {
-  font-family: var(--font-display);
-  font-variation-settings: 'WONK' 1;
-  line-height: 1.12;
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -33,26 +38,38 @@ button {
 
 .label {
   font-family: var(--font-label);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 0.6rem;
+  line-height: 1.7;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
 
+h1,
+h2,
+.header,
+.page > .map {
+  text-shadow: none;
+}
+
 .page {
-  padding: var(--space-4);
+  padding: var(--space-4) var(--space-4) 3.5rem;
+}
+
+button,
+.button {
+  image-rendering: pixelated;
 }
 
 .notice {
   margin: 0;
-  padding: var(--space-1) var(--space-5);
-  background: rgb(197 143 44 / 0.25);
-  border-bottom: 1px solid var(--ink);
+  padding: var(--space-2) var(--space-5);
+  background: var(--coin);
+  border-bottom: 4px solid var(--ink);
 }
 
 /* Paper grain: low-opacity noise over everything, multiplied into the cream. */
 body::before {
-  content: '';
+  content: none;
   position: fixed;
   inset: 0;
   z-index: 10;

@@ -24,7 +24,7 @@ Developers stuck in tutorial hell: they can recite a definition and a use case, 
 ## Inspiration & Identity
 - Duolingo's teaching mechanism (short lessons, instant feedback) with Mario-style game feel: levels and a visible progression path.
 - Every screen should feel part of a game, not a quiz application.
-- Design should read as hand-crafted, not generic. Gamification and behavioral economics inform the feel.
+- Design reads as a pixel-art overworld, not a generic template (revised from the earlier hand-crafted direction). Gamification and behavioral economics inform the feel.
 
 ## Why This Matters to the Learner
 "We all, especially developers, are stuck in tutorial hell." They want learning that is verified and usable when needed. It is also their chance to get fully comfortable with spec-driven development, building something distinctive with clean, scalable, maintainable architecture.

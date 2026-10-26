@@ -47,7 +47,7 @@ src/
 ├── domain/        pure TypeScript rules: session reducer, scoring, results (no React, no I/O)
 ├── content/       where challenges come from: a ContentProvider port + the bundled topic + Zod schema
 ├── persistence/   where progress is saved: a ProgressRepository port + localStorage / in-memory adapters
-├── ui/            React screens and components, the hand-drawn map, the handicraft kit
+├── ui/            React screens and components, the landing page, the pixel progress path, the pixel kit
 └── app/           composition root: the only place concrete adapters are chosen
 ```
 
@@ -55,7 +55,7 @@ src/
 - **Swap the storage.** Implement `ProgressRepository` (for example, cloud saving) the same way.
 - **Add a topic.** Add a file under `src/content/topics/` that satisfies the schema in `src/content/schema.ts`.
 
-The hand-drawn look comes from a seeded random generator, so every line is irregular but identical on every render (`src/ui/handcraft/`).
+The look is a pixel-art overworld: Press Start 2P headings, sky and brick backdrop, cream panels with hard shadows, and original pixel sprites drawn from character grids (`src/ui/screens/LandingScreen.tsx`, `src/ui/theme/`). Animation is stepped and switched off for reduced motion.
 
 ## Scripts
 

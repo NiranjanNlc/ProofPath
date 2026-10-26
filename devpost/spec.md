@@ -13,7 +13,7 @@ It has four kinds of pieces, kept deliberately separate:
 1. **The rules (the "domain").** Plain TypeScript with no React in it. It knows what a session is, how one challenge moves from first answer to hint to retry to reveal, and how the score is calculated. It is the brain, and it can be tested without opening a browser.
 2. **The content.** The one topic (k-fold vs. stratified k-fold) lives in data files: scenarios, options, the misconception behind each wrong option, hints, and reveal explanations. The app never reads those files directly. It asks a **content provider**, a small contract that says "give me this topic's challenges". Today the provider reads bundled files. Later, a provider that asks an AI to generate challenges can replace it and nothing else changes.
 3. **The memory.** A **progress repository**, which is another small contract, saves and loads the session. Today it uses `localStorage`, a sticky note the browser keeps for one site. A cloud-saving version could replace it later.
-4. **The screens.** React components draw the challenge screen, the hand-drawn map path, and the results screen. They only show what the rules say and report what the learner did.
+4. **The screens.** React components draw the landing page, the challenge screen, the pixel progress path, and the results screen. They only show what the rules say and report what the learner did.
 
 The rule is that **dependencies point inward**: screens depend on the rules, and the rules depend on nothing. Content and memory are plugged in at one spot (the composition root) when the app starts.
 
@@ -43,7 +43,7 @@ PRD ref: `prd.md > The Core Journey`.
 | **React** with **TypeScript (strict)** | React is the learner's choice. TypeScript strict mode makes the domain and content contracts enforceable, which supports the clean-architecture value. *Derived recommendation: the learner can veto at review.* | https://react.dev · https://www.typescriptlang.org/docs/ |
 | **Vite** | Standard, fast React build tool and dev server (`localhost:5173`). Outputs a static folder for deployment. | https://vite.dev/guide/ |
 | **Plain CSS with design tokens** (CSS variables, CSS Modules per component) | Handicraft styling needs full control over borders, blend modes, and animation. No UI kit would fight it. | https://developer.mozilla.org/en-US/docs/Web/CSS |
-| **Inline SVG + a small seeded-random helper** | Wobbly paths, stitches, and map nodes, identical on every render. No game engine required. | https://developer.mozilla.org/en-US/docs/Web/SVG |
+| **Inline SVG + a small seeded-random helper** | Pixel sprites, the progress path, and map nodes, identical on every render. No game engine required. | https://developer.mozilla.org/en-US/docs/Web/SVG |
 | **Zod** | Validates content files and saved progress at the boundaries. This matters especially for future AI-generated content, which can't be trusted to match the shape. *Derived recommendation.* | https://zod.dev |
 | **Vitest + React Testing Library** | Unit tests for the rules, content, and persistence, plus one journey test of the UI. Vitest shares Vite's config. | https://vitest.dev · https://testing-library.com/docs/react-testing-library/intro/ |
 | **ESLint + Prettier** | Consistency, plus enforcing the layer boundaries (see Components). | https://eslint.org · https://prettier.io |
@@ -62,22 +62,18 @@ PRD ref: `prd.md > The Core Journey`.
 - **Required for submission regardless of the deployment:** a short demo video and a public GitHub repo. The deployed link does not replace either.
 
 ## Look and Feel
-Carried forward, not re-interviewed. Source: `prd.md > Look and Feel`, `scope.md > Inspiration & Identity`.
+Revised direction: a pixel-art overworld. Source: `prd.md > Look and Feel`. The earlier hand-drawn paper-and-stitch blend is retired.
 
-**The agreed blend** (the learner accepted this for the PRD's open question on the primary visual material):
-- **Lead material: hand-drawn overworld map.** Progress is a wobbly ink path with a node per challenge, small illustrated landmarks, and a "you are here" marker. Take the grammar of Mario-world maps (nodes, paths, tile grid, capped palette), none of Nintendo's characters or assets.
-- **Ground: warm cream paper**, with faint grain (low-opacity noise) and one consistent light direction. Cards use an offset paper shadow, as in the learner's reference screenshot.
-- **Detail: running-stitch dashed borders** on cards and buttons.
-- **Palette tokens:** cream paper (not #FFF), warm near-black ink (not #000), and 4 inks: muted madder red, indigo, ochre, moss. Overprinted with `mix-blend-mode: multiply`.
-- **Typography:** a soft, wonky serif for display (Fraunces, which has a variable "WONK" axis); a legible text serif for body (e.g. Newsreader); a mono for small labels like "CHALLENGE 01 · PICK YOUR SPLIT" and key hints. Display headings get small seeded per-letter variation (rotation and offset) so repeated letters aren't identical, with `aria-label` on the whole heading. Body and answer text are never handwritten.
-- **Technique:** seeded irregularity (same on every render), sparing stop-motion animation at 8–12 fps using CSS `steps()`, disabled under `prefers-reduced-motion`.
-- **Crisp underneath:** answer options, spacing, contrast, and touch targets stay rigorous. Handmade character lives in headings, borders, the map, and illustration.
-- **Tone of copy:** warm, a little playful, never scolding. A wrong answer is "information", as in the reference screenshot's footer line.
-- **Must not look like:** skeuomorphism, handwriting body copy, a uniform sketch filter, kitsch, Corporate Memphis or AI watercolour, blurry pixel pastiche, pure white/black, uniform 8px cards, glassmorphism, SaaS gradients.
-
-**Reference screenshot** (`Screenshot From 2026-10-26 15-00-37.png`, an earlier layout from the learner). What is taken: the challenge-card anatomy (mono eyebrow label, serif headline, scenario, lettered options, "Keys: A–C, then Enter" hint, "Check answer" button) and the footnote "Your first answer is logged separately from any retries". What is not taken: the 9-problem count, the "All problem sets" picker (deferred by the PRD), and numbered tiles (replaced by the map path).
-
-**What the stack can and cannot honour:** plain CSS and SVG honour all of this. The one thing to verify early is whether Fraunces' WONK axis (and any alternates) is available in the Fontsource variable build. If not, the per-letter seeded variation carries the effect alone.
+- **Lead material: pixel overworld.** Sky-blue ground, a brick-strip floor fixed to the bottom of the viewport, "?" blocks, and a HUD. Progress is a coin-yellow path with a node per challenge and a "you are here" marker. Take the grammar of classic platformer worlds, none of Nintendo's characters or assets. Sprites are original and drawn as small character grids rendered to SVG `<rect>`s with `shape-rendering: crispEdges`.
+- **Panels:** cream (`--paper-raised`) cards with a 4px ink border and a hard 6px offset shadow (`--shadow-paper`). No blur anywhere.
+- **Palette tokens:** sky `--paper`, cream `--paper-raised`, ink, coin yellow, brick and brick-dark, plus madder, indigo, ochre, moss for outcomes.
+- **Typography:** Press Start 2P (`--font-pixel`, also `--font-label`) for headings, labels, HUD and buttons. Newsreader stays for body and answer text. Pixel type is never used for paragraphs.
+- **Controls:** yellow pixel buttons with an inset shade and hard shadow that press down on hover and active. Answer options are chunky blocks with yellow lettered tiles, red when tried, green when correct.
+- **Landing page:** one screen, no scroll (`height: 100dvh`, `overflow: hidden`). It is shown only when a learner has no saved progress. A pixel hero hops along levels 1-1 to 1-5 using stepped keyframes.
+- **Technique:** stepped animation (`steps()`), disabled under `prefers-reduced-motion`.
+- **Crisp underneath:** answer options, spacing, contrast, and touch targets stay rigorous.
+- **Tone of copy:** warm, a little playful, never scolding. A wrong answer is "information".
+- **Must not look like:** pixel-font body copy, blurry pixel pastiche, copied Nintendo assets, SaaS gradients, glassmorphism, pure white or black.
 
 ## Components
 Layers and the dependency rule, enforced with ESLint `no-restricted-imports`:
@@ -158,9 +154,9 @@ Implements `prd.md > Game-feel progress path`.
 Implements `prd.md > Combined scoring and results screen`, `prd.md > Screens and Layout` ("Results screen").
 Reads `Results` from the domain and shows the score with its parts, the misconceptions list (Corrected/Revealed), retry outcomes, and the transfer line, each backed by the learner's own answers. A "Start over" button dispatches `RESTART` (clears saved progress). *Derived implementation detail: the PRD doesn't name a replay control, but a demo needs a way to play again.*
 
-### UI: Handicraft kit
+### UI: Pixel kit
 Implements `prd.md > Look and Feel`.
-`ui/handcraft/`: `seededRandom.ts` (a small deterministic PRNG, e.g. mulberry32), `wobblePath.ts` (turns a clean path into a bounded-irregularity path from a seed), `StitchBorder.tsx` (running-stitch dashed border), `PaperCard.tsx` (cream ground, grain, offset shadow), `HandLetteredText.tsx` (display text with per-letter seeded variation + `aria-label`). `ui/theme/`: `tokens.css` (palette, spacing, type scale), `global.css`, `fonts.ts`. Rule: irregularity is always from a seed, never `Math.random()` at render time, so every render is identical.
+`ui/handcraft/` (kept from the earlier direction; reused for cards): `seededRandom.ts` (deterministic PRNG), `wobblePath.ts` (bounded-irregularity paths, used by the map), `PaperCard.tsx` (cream panel; its stitch border is hidden by CSS), `HandLetteredText.tsx` (plain pixel headings, per-letter variation disabled). `ui/screens/LandingScreen.tsx` holds the pixel sprites and the no-scroll landing page. `ui/theme/`: `tokens.css` (palette, spacing, type scale), `global.css`, `fonts.ts`. Rule: any irregularity comes from a seed, never `Math.random()` at render time.
 
 ### App: composition root and error boundary
 `app/compositionRoot.ts` is the only place that picks `staticContentProvider` and `localStorageProgressRepository` (falling back to the in-memory repository if `localStorage` throws). `App.tsx` picks the screen from `session.status`. `ErrorBoundary.tsx` shows a plain, on-brand message instead of a white screen.
@@ -234,7 +230,7 @@ The project root is the repo root. `devpost/` is the Devpost learning workspace.
 │       │   ├── ChallengeScreen/
 │       │   └── ResultsScreen/
 │       ├── components/                  # ChallengeCard, OptionList, FeedbackPanel, MapPath
-│       ├── handcraft/                   # seededRandom, wobblePath, StitchBorder, PaperCard, HandLetteredText
+│       ├── handcraft/                   # seededRandom, wobblePath, PaperCard (stitch hidden), HandLetteredText, StitchBorder
 │       ├── theme/                       # tokens.css, global.css, fonts.ts
 │       └── journey.test.tsx             # one full-journey UI test
 ├── public/
@@ -258,7 +254,7 @@ No runtime external services. No API keys. No cost.
 | Vite | Dev server and build | https://vite.dev/guide/ |
 | TypeScript | Language | https://www.typescriptlang.org/docs/ |
 | Zod | Content and saved-progress validation | https://zod.dev |
-| Fontsource (Fraunces, a body serif, a mono) | Self-hosted fonts | https://fontsource.org |
+| Fontsource (Press Start 2P, Newsreader) | Self-hosted fonts | https://fontsource.org |
 | Vitest, Testing Library | Tests | https://vitest.dev · https://testing-library.com |
 | ESLint, Prettier | Lint and format | https://eslint.org · https://prettier.io |
 | Browser `localStorage` | Saved progress | https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage |
@@ -268,7 +264,7 @@ No runtime external services. No API keys. No cost.
 ## Important Failure Modes
 - **`localStorage` is unavailable, full, or blocked** (private window, blocked site data) → the app falls back to the in-memory repository and still works. A small on-brand note says "Progress can't be saved in this browser" and restore won't apply.
 - **Saved progress is corrupt, from an older shape, or doesn't match current content** → validation rejects it and the learner starts fresh at challenge 1. No crash.
-- **An illustration or font fails to load** → the image shows its alt text inside the ink frame, and fonts fall back to a system serif. The layout still works.
+- **An illustration or font fails to load** → the image shows its alt text inside the panel, and fonts fall back to a system monospace and serif. The layout still works.
 - **Content that breaks its own rules** (two correct options, missing misconception) → caught by the content test and the schema at boot; it can't ship silently.
 - **Any unexpected render error** → the error boundary shows a plain message with a "Start over" button, not a white screen.
 
@@ -286,18 +282,18 @@ No runtime external services. No API keys. No cost.
 - **React.** Chosen by the learner.
 - **Public link wanted** ("others should also try"), so the app is a static deployment. Host (default Vercel) confirmed in `6-ship`.
 - **One topic, 5 challenges** (the learner changed the recommended 4 to 5 after sharing their reference screenshot, whose titles are used for challenges 1–4, plus one transfer). The last is the transfer challenge. Resolves `prd.md > Open Questions` (session length).
-- **Progress is the hand-drawn map path** from the PRD, not the screenshot's numbered tiles.
+- **Progress is the pixel level path** from the PRD, not the screenshot's numbered tiles.
 - **Scoring weights accepted** (table above). Tradeoff accepted: one transfer miss costs a lot. Resolves `prd.md > Open Questions` (scoring).
-- **Visual blend accepted** (map lead, paper ground, stitched detail). Resolves `prd.md > Open Questions` (primary material).
+- **Visual direction changed to a pixel-art overworld** (replacing the paper and stitch blend). Resolves `prd.md > Open Questions` (primary material).
 - **Standard software practice, without overriding the learner's values** (clean architecture, scalability, maintainability). Applied as ports-and-adapters layering with enforced boundaries, strict TypeScript, tests, lint, and CI.
 
-**Derived implementation details** (follow from the above; the learner can change them at review): TypeScript strict, Zod, Vitest + RTL, ESLint/Prettier, GitHub Actions CI, no router or state library, localStorage key and versioning scheme, "Start over" on the results screen, keyboard A–D + Enter, font choices (Fraunces and others).
+**Derived implementation details** (follow from the above; the learner can change them at review): TypeScript strict, Zod, Vitest + RTL, ESLint/Prettier, GitHub Actions CI, no router or state library, localStorage key and versioning scheme, "Start over" on the results screen, keyboard A–D + Enter, font choices (Press Start 2P and Newsreader).
 
 **The learner's uncertainty:** none identified. When asked which part they were least sure about, the learner asked for standard practice that doesn't override their values. No new tool or exercise was added.
 
 **Open issues**
 - **Challenge content authoring.** The wording of the five challenges, every wrong-option misconception, hint, and reveal is written in `5-build`. The learner must review the ML correctness and the transfer challenge's genuinely different surface details. This is the highest-risk item for the kernel; the spec only guarantees the shape.
-- **Font specifics.** Verify Fraunces' WONK axis and the Fontsource package availability at scaffold time (first build step).
+- **Font specifics.** Press Start 2P is the pixel face; check it stays crisp at the sizes used.
 - **Library versions.** Pin current stable versions at scaffold time.
-- **Illustration craft.** Hand-authoring five SVG illustrations in the handicraft style is the biggest visual cost. Fallback: simple ink-style diagrams in the palette.
+- **Illustration craft.** The five SVG illustrations are ink-style diagrams and still need to be redrawn in the pixel palette. Fallback: keep the ink diagrams on the cream panel.
 - **Cross-device progress** is not needed for the PoC (carried from `prd.md > Open Questions`).

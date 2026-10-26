@@ -49,24 +49,24 @@ Build mode: fast
   Learner check: Answer one challenge, close the tab, reopen it, and confirm you land where you left off. Then answer wrong once, refresh, and confirm you cannot reset the attempt.
   Commit: `Persist and restore session progress`
 
-- [x] **5. You see a hand-drawn map showing where you are**
-  Becomes usable: A wobbly ink path with five nodes shows finished challenges stamped by outcome colour and a "you are here" marker. It is visual only.
+- [x] **5. You see a map showing where you are**
+  Becomes usable: A path with five nodes shows finished challenges stamped by outcome colour and a "you are here" marker. It is visual only.
   Why now: It's the game-feel progress layer, built once state and progress are real so it has real data to show.
   PRD ref: `prd.md > Game-feel progress path`, `prd.md > Look and Feel`
   Spec ref: `spec.md > UI: Map path (progress)`, `spec.md > UI: Handicraft kit`
   Build: Add the seeded random and wobble-path helpers, the MapPath SVG with node states and marker, and place it beside or above the challenge card, with a horizontal strip on narrow screens.
   Verify (mechanical): Tests confirm the same seed gives the same path and different seeds differ; node states follow the session records; typecheck, lint and test pass; inspect the rendered map at desktop and narrow widths.
-  Learner check: Play through and watch the map change. Say whether it feels like a hand-drawn journey and not a progress bar, and whether the wobble feels deliberate.
-  Commit: `Add hand-drawn map path for progress`
+  Learner check: Play through and watch the map change. Say whether it feels like a journey and not a progress bar.
+  Commit: `Add hand-drawn map path for progress` (restyled to pixel art in a later pass)
 
-- [x] **6. The whole app feels hand-crafted**
-  Becomes usable: Cream paper with grain, offset paper-shadow cards, running-stitch borders, lettered display headings, ink palette with multiply overprint, sparing stop-motion, reduced-motion support, keyboard and screen-reader polish.
+- [x] **6. The whole app feels like a pixel-art game world**
+  Becomes usable: Revised: sky and brick backdrop, cream panels with hard offset shadows, pixel headings and HUD, yellow pixel buttons, a no-scroll landing page, stepped animation, reduced-motion support, keyboard and screen-reader polish.
   Why now: Left late on purpose, so the look is applied to a behaviour that already works and is not rebuilt as the behaviour changes.
   PRD ref: `prd.md > Look and Feel`
   Spec ref: `spec.md > Look and Feel`, `spec.md > UI: Handicraft kit`
-  Build: Add PaperCard, StitchBorder and HandLetteredText, finish the tokens and grain, refine the illustrations, apply 8–12 fps CSS stop-motion with `prefers-reduced-motion` off-switch, and verify focus order, contrast and responsive layout.
+  Build: Add PaperCard and HandLetteredText, restyle the tokens to the pixel palette and Press Start 2P, add the no-scroll landing page, apply stepped CSS animation with `prefers-reduced-motion` off-switch, and verify focus order, contrast and responsive layout.
   Verify (mechanical): Typecheck, lint, test pass; production `npm run build` succeeds; check contrast of text on cream and that nothing animates under reduced motion; screenshot desktop and narrow widths.
-  Learner check: Look at every screen and ask: does anything feel generic, like a quiz app, or like a texture filter on a standard UI?
+  Learner check: Look at every screen and ask: does anything feel generic, like a quiz app or an AI template?
   Commit: `Apply handicraft look across screens`
 
 - [x] **7. Someone else can run and try it**
