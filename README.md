@@ -6,6 +6,11 @@ A game-feel learning app for developers stuck in tutorial hell. It doesn't expla
 
 The proof-of-concept topic is model validation (k-fold vs. stratified k-fold, data leakage, imbalanced metrics, test-set hygiene): five challenges, the last one a transfer challenge with different surface details.
 
+## Live demo
+
+- **Play it:** <https://proof-path.netlify.app/>
+- **Watch the demo video:** <https://youtu.be/dqld42gN2Xw>
+
 ## Try it
 
 Requires Node 22 or later.
@@ -70,3 +75,7 @@ The look is a pixel-art overworld: Press Start 2P headings, sky and brick backdr
 ## Deploying
 
 It's a static site: build with `npm run build` and serve `dist/`. On Vercel or Netlify, import the repository with the Vite preset (build command `npm run build`, output directory `dist`). No environment variables or API keys are needed.
+
+## License
+
+[MIT](LICENSE)

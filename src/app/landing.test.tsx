@@ -11,7 +11,7 @@ describe('LandingScreen', () => {
     render(<LandingScreen topic={topic} onStart={onStart} />);
 
     expect(
-      screen.getByRole('heading', { level: 1, name: /still went blank/i }),
+      screen.getByRole('heading', { level: 1, name: /show me what you can solve/i }),
     ).toBeInTheDocument();
     expect(screen.getByText('Protect the test set')).toBeInTheDocument();
     expect(screen.getByText('0 / 100')).toBeInTheDocument();

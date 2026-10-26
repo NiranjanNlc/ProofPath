@@ -82,11 +82,11 @@ export function LandingScreen({ topic, onStart }: { topic: Topic; onStart: () =>
         />
         <div className="landing__copy">
           <h1>
-            You passed the quiz. <em>The real project still went blank.</em>
+            Don&apos;t show me what you watched. <em>Show me what you can solve.</em>
           </h1>
           <p>
-            Nobody tells you which idea to use. Get a real situation, make the call, and see why the
-            wrong answer felt right.
+            You can explain K-Fold and Stratified K-Fold. On a real project, which one do you pick?
+            ProofPath hands you the situation and you make the call.
           </p>
           <button type="button" className="landing__start" onClick={onStart}>
             <span aria-hidden="true">▶</span> Press start

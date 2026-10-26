@@ -27,7 +27,7 @@ Loop: **Surprise → Diagnose → Transfer → Reflect** (source: `scope.md > Th
 ## Screens and Layout
 Surfaces, kept to what the journey needs:
 
-- **Landing page.** A single no-scroll screen: the problem in one headline ("You passed the quiz. The real project still went blank."), one line of copy, a "Press start" button, and the five levels shown as a path. No topic or level picker in the PoC. Returning learners with saved progress skip it and resume.
+- **Landing page.** A single no-scroll screen: the problem in one headline ("Don't show me what you watched. Show me what you can solve."), one line of copy, a "Press start" button, and the five levels shown as a path. No topic or level picker in the PoC. Returning learners with saved progress skip it and resume.
 - **Challenge screen** (used for the surprise, remaining challenges, and the transfer challenge). Scenario text, a relevant picture, multiple-choice answers, and submit. Shown here are the progress path (see Look and Feel) and the feedback area for the hint, diagnosis, and reveal.
 - **Results screen.** Initial accuracy, misconceptions addressed, retry outcomes, and transfer performance, backed by evidence from the learner's own answers.
 
