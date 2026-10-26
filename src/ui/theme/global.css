@@ -49,3 +49,81 @@ button {
   background: rgb(197 143 44 / 0.25);
   border-bottom: 1px solid var(--ink);
 }
+
+/* Paper grain: low-opacity noise over everything, multiplied into the cream. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.14 0 0 0 0 0.12 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Stop-motion: a few frames per second, never smooth easing. Off for reduced motion. */
+@keyframes jump-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  34% {
+    opacity: 0.6;
+    transform: translateY(3px);
+  }
+  67% {
+    opacity: 1;
+    transform: translateY(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bob {
+  0% {
+    transform: translateY(0);
+  }
+  34% {
+    transform: translateY(-3px);
+  }
+  67% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .feedback {
+    animation: jump-in 0.375s steps(1, end) 1;
+  }
+  .map__here {
+    animation: bob 1.125s steps(1, end) infinite;
+  }
+}
+
+/* Short laptop screens: tighten the vertical rhythm so a challenge still fits without scrolling. */
+@media (min-width: 60.01rem) and (max-height: 820px) {
+  .page {
+    padding: var(--space-2) var(--space-4);
+  }
+  .map {
+    max-height: 5.25rem;
+    margin-bottom: var(--space-2);
+  }
+  .challenge,
+  .results {
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+  }
+  .challenge__image {
+    max-height: 16vh;
+  }
+  .challenge h1 {
+    font-size: 1.6rem;
+  }
+}

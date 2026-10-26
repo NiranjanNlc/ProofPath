@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { buildResults } from '../../domain/results';
 import type { Outcome } from '../../domain/types';
+import { PaperCard } from '../handcraft/PaperCard';
+import { seedFrom } from '../handcraft/seededRandom';
 import { useSession } from '../state/SessionProvider';
 import './ResultsScreen.css';
 
@@ -18,7 +20,7 @@ export function ResultsScreen() {
   const { initialAccuracy, retries, misconceptions, transfer } = results;
 
   return (
-    <article className="results">
+    <PaperCard className="results" seed={seedFrom('results')}>
       <section className="results__summary">
         <p className="label">Your mastery report · {topic.title}</p>
         <h1>
@@ -90,6 +92,6 @@ export function ResultsScreen() {
           </ul>
         )}
       </section>
-    </article>
+    </PaperCard>
   );
 }

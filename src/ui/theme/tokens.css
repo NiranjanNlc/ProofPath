@@ -9,6 +9,11 @@
   --ochre: #c58f2c;
   --moss: #5d7a3a;
 
+  /* Darker inks for small text: the fill inks above fail contrast on cream. */
+  --madder-ink: #a13a34;
+  --ochre-ink: #8a5f0f;
+  --moss-ink: #4a6a2a;
+
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-body: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
   --font-label: 'IBM Plex Mono', ui-monospace, Menlo, monospace;

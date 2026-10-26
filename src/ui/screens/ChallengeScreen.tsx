@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { isLastChallenge } from '../../domain/session';
+import { HandLetteredText } from '../handcraft/HandLetteredText';
+import { PaperCard } from '../handcraft/PaperCard';
+import { seedFrom } from '../handcraft/seededRandom';
 import { FeedbackPanel } from '../components/FeedbackPanel';
 import { OptionList, optionLetter } from '../components/OptionList';
 import { useSession } from '../state/SessionProvider';
@@ -45,13 +48,13 @@ function ChallengeView() {
   const lastLetter = optionLetter(challenge.options.length - 1);
 
   return (
-    <article className="challenge">
+    <PaperCard className="challenge" seed={seedFrom(challenge.id)}>
       <div className="challenge__story">
         <p className="label">
           Challenge {String(session.currentIndex + 1).padStart(2, '0')} · {challenge.title}
           {challenge.isTransfer && ' · Transfer challenge'}
         </p>
-        <h1>{challenge.headline}</h1>
+        <HandLetteredText as="h1" text={challenge.headline} />
         <p className="challenge__scenario">{challenge.scenario}</p>
         <img className="challenge__image" src={challenge.image.src} alt={challenge.image.alt} />
       </div>
@@ -87,6 +90,6 @@ function ChallengeView() {
           )}
         </div>
       </div>
-    </article>
+    </PaperCard>
   );
 }

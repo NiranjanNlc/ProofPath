@@ -59,7 +59,7 @@ Build mode: fast
   Learner check: Play through and watch the map change. Say whether it feels like a hand-drawn journey and not a progress bar, and whether the wobble feels deliberate.
   Commit: `Add hand-drawn map path for progress`
 
-- [ ] **6. The whole app feels hand-crafted**
+- [x] **6. The whole app feels hand-crafted**
   Becomes usable: Cream paper with grain, offset paper-shadow cards, running-stitch borders, lettered display headings, ink palette with multiply overprint, sparing stop-motion, reduced-motion support, keyboard and screen-reader polish.
   Why now: Left late on purpose, so the look is applied to a behaviour that already works and is not rebuilt as the behaviour changes.
   PRD ref: `prd.md > Look and Feel`

@@ -76,7 +76,7 @@
 }
 
 .map__here text {
-  fill: var(--madder);
+  fill: var(--madder-ink);
   font-weight: 600;
 }
 

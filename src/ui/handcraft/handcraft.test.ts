@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { seededRandom, seedFrom } from './seededRandom';
+import { stitchPath } from './stitch';
 import { wobbleCircle, wobbleLine } from './wobblePath';
 
 const a = { x: 0, y: 0 };
@@ -53,5 +54,25 @@ describe('wobbleCircle', () => {
   it('is deterministic and closed', () => {
     expect(wobbleCircle(50, 50, 20, 3)).toBe(wobbleCircle(50, 50, 20, 3));
     expect(wobbleCircle(50, 50, 20, 3).endsWith('Z')).toBe(true);
+  });
+});
+
+describe('stitchPath', () => {
+  it('is identical for the same size and seed', () => {
+    expect(stitchPath(400, 200, 11)).toBe(stitchPath(400, 200, 11));
+  });
+
+  it('differs between seeds', () => {
+    expect(stitchPath(400, 200, 1)).not.toBe(stitchPath(400, 200, 2));
+  });
+
+  it('keeps every stitch inside the card', () => {
+    const numbers = (stitchPath(400, 200, 3).match(/-?\d+\.\d/g) ?? []).map(Number);
+    const xs = numbers.filter((_, i) => i % 2 === 0);
+    const ys = numbers.filter((_, i) => i % 2 === 1);
+    expect(Math.min(...xs)).toBeGreaterThan(0);
+    expect(Math.max(...xs)).toBeLessThan(400);
+    expect(Math.min(...ys)).toBeGreaterThan(0);
+    expect(Math.max(...ys)).toBeLessThan(200);
   });
 });

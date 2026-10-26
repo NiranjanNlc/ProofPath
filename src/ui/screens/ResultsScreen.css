@@ -5,9 +5,6 @@
   max-width: 72rem;
   margin: 0 auto;
   padding: var(--space-4) var(--space-5);
-  background: var(--paper-raised);
-  border: 1.5px solid var(--ink);
-  box-shadow: var(--shadow-paper);
 }
 
 .results h1 {
@@ -77,15 +74,15 @@
 }
 
 .outcome[data-outcome='first-try'] {
-  color: var(--moss);
+  color: var(--moss-ink);
 }
 
 .outcome[data-outcome='corrected'] {
-  color: var(--ochre);
+  color: var(--ochre-ink);
 }
 
 .outcome[data-outcome='revealed'] {
-  color: var(--madder);
+  color: var(--madder-ink);
 }
 
 .results__misconceptions {
