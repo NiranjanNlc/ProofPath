@@ -1,7 +1,10 @@
 .challenge {
-  max-width: 44rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-5);
+  max-width: 72rem;
   margin: 0 auto;
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-4) var(--space-5);
   background: var(--paper-raised);
   border: 1.5px solid var(--ink);
   box-shadow: var(--shadow-paper);
@@ -9,31 +12,33 @@
 
 .challenge h1 {
   margin: var(--space-2) 0 var(--space-3);
-  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-size: clamp(1.6rem, 2.6vw, 2.25rem);
 }
 
 .challenge__scenario {
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-3);
 }
 
 .challenge__image {
   display: block;
   width: 100%;
-  height: auto;
-  margin-bottom: var(--space-4);
+  max-height: 24vh;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .challenge__help {
-  margin: var(--space-3) 0 0;
+  margin: var(--space-2) 0 0;
   color: var(--ink-soft);
+  font-size: 0.95rem;
 }
 
 .challenge__actions {
-  margin-top: var(--space-4);
+  margin-top: var(--space-3);
 }
 
 .button {
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-4);
   background: transparent;
   border: 1.5px solid var(--ink);
   cursor: pointer;
@@ -48,4 +53,16 @@
 .button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+/* Narrow screens stack the columns; scrolling is acceptable there. */
+@media (max-width: 60rem) {
+  .challenge {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-3);
+  }
+  .challenge__image {
+    max-height: none;
+  }
 }

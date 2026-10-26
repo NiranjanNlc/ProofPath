@@ -46,42 +46,46 @@ function ChallengeView() {
 
   return (
     <article className="challenge">
-      <p className="label">
-        Challenge {String(session.currentIndex + 1).padStart(2, '0')} · {challenge.title}
-        {challenge.isTransfer && ' · Transfer challenge'}
-      </p>
-      <h1>{challenge.headline}</h1>
-      <p className="challenge__scenario">{challenge.scenario}</p>
-      <img className="challenge__image" src={challenge.image.src} alt={challenge.image.alt} />
-
-      <OptionList
-        options={challenge.options}
-        selectedId={selectedId}
-        triedWrongIds={triedWrongIds}
-        disabled={resolved}
-        correctId={challenge.correctOptionId}
-        onSelect={setSelectedId}
-      />
-
-      {!resolved && (
-        <p className="challenge__help">
-          Pick the answer you could defend to a reviewer.{' '}
-          <span className="label">Keys: A–{lastLetter}, then Enter.</span>
+      <div className="challenge__story">
+        <p className="label">
+          Challenge {String(session.currentIndex + 1).padStart(2, '0')} · {challenge.title}
+          {challenge.isTransfer && ' · Transfer challenge'}
         </p>
-      )}
+        <h1>{challenge.headline}</h1>
+        <p className="challenge__scenario">{challenge.scenario}</p>
+        <img className="challenge__image" src={challenge.image.src} alt={challenge.image.alt} />
+      </div>
 
-      <FeedbackPanel challenge={challenge} record={record} />
+      <div className="challenge__play">
+        <OptionList
+          options={challenge.options}
+          selectedId={selectedId}
+          triedWrongIds={triedWrongIds}
+          disabled={resolved}
+          correctId={challenge.correctOptionId}
+          onSelect={setSelectedId}
+        />
 
-      <div className="challenge__actions">
-        {resolved ? (
-          <button type="button" className="button" onClick={advance}>
-            {last ? 'Finish' : 'Continue'} →
-          </button>
-        ) : (
-          <button type="button" className="button" disabled={!selectedId} onClick={submit}>
-            Check answer →
-          </button>
+        {!resolved && (
+          <p className="challenge__help">
+            Pick the answer you could defend to a reviewer.{' '}
+            <span className="label">Keys: A–{lastLetter}, then Enter.</span>
+          </p>
         )}
+
+        <FeedbackPanel challenge={challenge} record={record} />
+
+        <div className="challenge__actions">
+          {resolved ? (
+            <button type="button" className="button" onClick={advance}>
+              {last ? 'Finish' : 'Continue'} →
+            </button>
+          ) : (
+            <button type="button" className="button" disabled={!selectedId} onClick={submit}>
+              Check answer →
+            </button>
+          )}
+        </div>
       </div>
     </article>
   );

@@ -9,8 +9,8 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.55;
+  font-size: 1.0625rem;
+  line-height: 1.45;
 }
 
 h1,
@@ -40,5 +40,5 @@ button {
 }
 
 .page {
-  padding: var(--space-5) var(--space-4) var(--space-6);
+  padding: var(--space-4);
 }
