@@ -42,3 +42,10 @@ button {
 .page {
   padding: var(--space-4);
 }
+
+.notice {
+  margin: 0;
+  padding: var(--space-1) var(--space-5);
+  background: rgb(197 143 44 / 0.25);
+  border-bottom: 1px solid var(--ink);
+}

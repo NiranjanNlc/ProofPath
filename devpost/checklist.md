@@ -39,7 +39,7 @@ Build mode: fast
   Learner check: Play through with a mix of right, corrected and missed answers and check that every number on the results screen matches what you did.
   Commit: `Add combined scoring and results screen`
 
-- [ ] **4. Your progress survives closing the tab**
+- [x] **4. Your progress survives closing the tab**
   Becomes usable: Leave at any point, including after a wrong first answer, and return to the same challenge with the hint and single retry intact; a first visit still starts at challenge 1.
   Why now: Saving is the first place the data model can be wrong, and the whole session shape now exists to save.
   PRD ref: `prd.md > Saved progress`, `prd.md > States and Boundaries`

@@ -80,3 +80,44 @@ export function sessionReducer(
       return createSession(topic);
   }
 }
+
+/**
+ * Accepts a saved session only if it still makes sense for the current content. Anything
+ * inconsistent (old content version, unknown ids, impossible attempts) is rejected and the
+ * caller starts fresh. Never trusts stored outcomes: they must match the stored attempts.
+ */
+export function restoreSession(saved: SessionState | null, topic: Topic): SessionState | null {
+  if (!saved) return null;
+  if (saved.topicId !== topic.id || saved.contentVersion !== topic.contentVersion) return null;
+  if (saved.currentIndex < 0 || saved.currentIndex >= topic.challenges.length) return null;
+
+  const seen = new Set<string>();
+  for (const record of saved.records) {
+    const challengeIndex = topic.challenges.findIndex((c) => c.id === record.challengeId);
+    const challenge = topic.challenges[challengeIndex];
+    if (!challenge || seen.has(challenge.id) || challengeIndex > saved.currentIndex) return null;
+    seen.add(challenge.id);
+
+    if (record.attempts.length > MAX_ATTEMPTS) return null;
+    const validAttempts = record.attempts.every(
+      (a) =>
+        challenge.options.some((o) => o.id === a.optionId) &&
+        a.correct === (a.optionId === challenge.correctOptionId),
+    );
+    if (!validAttempts) return null;
+    if (record.outcome !== outcomeFor(record.attempts)) return null;
+    // A challenge before the current one must be finished.
+    if (challengeIndex < saved.currentIndex && !record.outcome) return null;
+  }
+  for (let i = 0; i < saved.currentIndex; i++) {
+    if (!seen.has(topic.challenges[i]!.id)) return null;
+  }
+
+  if (saved.status === 'finished') {
+    const allResolved = topic.challenges.every(
+      (c) => saved.records.find((r) => r.challengeId === c.id)?.outcome,
+    );
+    if (!allResolved || saved.currentIndex !== topic.challenges.length - 1) return null;
+  }
+  return saved;
+}

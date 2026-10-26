@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
+import { createSession, restoreSession } from '../domain/session';
+import { LocalStorageProgressRepository } from '../persistence/localStorageProgressRepository';
+import { MemoryProgressRepository } from '../persistence/memoryProgressRepository';
 import { staticContentProvider } from '../content/staticContentProvider';
 import { SessionProvider } from '../ui/state/SessionProvider';
 import { App } from './App';
@@ -9,7 +12,11 @@ async function setup() {
   const topic = await staticContentProvider.getTopic('model-validation');
   const user = userEvent.setup();
   render(
-    <SessionProvider topic={topic}>
+    <SessionProvider
+      topic={topic}
+      initialSession={createSession(topic)}
+      repository={new MemoryProgressRepository()}
+    >
       <App />
     </SessionProvider>,
   );
@@ -75,5 +82,47 @@ describe('full journey', () => {
     }
     await user.click(screen.getByRole('button', { name: /start over/i }));
     expect(screen.getByText(/challenge 01/i)).toBeInTheDocument();
+  });
+
+  it('warns when progress cannot be saved', async () => {
+    await setup();
+    expect(screen.getByText(/progress can.t be saved/i)).toBeInTheDocument();
+  });
+
+  it('restores the hint and single retry after leaving mid-challenge', async () => {
+    const topic = await staticContentProvider.getTopic('model-validation');
+    const store = new Map<string, string>();
+    const storage = {
+      getItem: (k: string) => store.get(k) ?? null,
+      setItem: (k: string, v: string) => void store.set(k, v),
+      removeItem: (k: string) => void store.delete(k),
+    };
+    const repository = new LocalStorageProgressRepository(storage);
+    const user = userEvent.setup();
+    const mount = () =>
+      render(
+        <SessionProvider
+          topic={topic}
+          initialSession={restoreSession(repository.load(), topic) ?? createSession(topic)}
+          repository={repository}
+        >
+          <App />
+        </SessionProvider>,
+      );
+
+    const first = mount();
+    await user.click(screen.getByRole('radio', { name: /shuffle and split randomly/i }));
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    expect(screen.queryByText(/progress can.t be saved/i)).not.toBeInTheDocument();
+    first.unmount(); // the learner closes the tab
+
+    mount(); // and comes back
+    expect(screen.getByText(/why that was tempting/i)).toBeInTheDocument();
+    expect(screen.getByText(/one retry/i)).toBeInTheDocument();
+
+    // Refreshing cannot reset the attempt: a second wrong answer still reveals.
+    await user.click(screen.getByRole('radio', { name: /train on all records/i }));
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    expect(screen.getByText(/the answer/i)).toBeInTheDocument();
   });
 });
