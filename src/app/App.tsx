@@ -1,5 +1,6 @@
 import { AppHeader } from '../ui/components/AppHeader';
 import { ChallengeScreen } from '../ui/screens/ChallengeScreen';
+import { ResultsScreen } from '../ui/screens/ResultsScreen';
 import { useSession } from '../ui/state/SessionProvider';
 
 export function App() {
@@ -8,11 +9,7 @@ export function App() {
     <>
       <AppHeader />
       <main className="page">
-        {session.status === 'finished' ? (
-          <p>Session finished. The results screen arrives in a later slice.</p>
-        ) : (
-          <ChallengeScreen />
-        )}
+        {session.status === 'finished' ? <ResultsScreen /> : <ChallengeScreen />}
       </main>
     </>
   );

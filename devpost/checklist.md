@@ -29,7 +29,7 @@ Build mode: fast
   Learner check: Play all five challenges. Read each one and say whether the ML is correct, whether the wrong options are tempting for the right reasons, and whether challenge 5 is genuinely new and not a re-skin.
   Commit: `Add five challenges ending in a transfer challenge`
 
-- [ ] **3. You see an evidence-based score and results at the end**
+- [x] **3. You see an evidence-based score and results at the end**
   Becomes usable: After challenge 5 the Results screen shows initial accuracy, misconceptions addressed (Corrected or Revealed), retry outcomes, transfer performance, and the 100-point score with each part's points. "Start over" begins a new session.
   Why now: Completes the Surprise → Diagnose → Transfer → Reflect loop. Scoring is pure domain logic, so it is cheap to build and test once the records exist.
   PRD ref: `prd.md > Combined scoring and results screen`, `prd.md > Screens and Layout`
@@ -81,7 +81,7 @@ Build mode: fast
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — after slice 2, when all five challenges are playable
+- [x] Early usable behavior explored — after slice 2, when all five challenges are playable
 - [ ] Final kick-the-tires exploration and feedback completed
 
 ## Final Review
