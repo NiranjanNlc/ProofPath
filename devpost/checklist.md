@@ -69,7 +69,7 @@ Build mode: fast
   Learner check: Look at every screen and ask: does anything feel generic, like a quiz app, or like a texture filter on a standard UI?
   Commit: `Apply handicraft look across screens`
 
-- [ ] **7. Someone else can run and try it**
+- [x] **7. Someone else can run and try it**
   Becomes usable: A clean clone installs, runs and builds from the README, and CI passes on every push, ready for a public deploy.
   Why now: The learner wants others to try it; this closes the gap between "works here" and "works for a stranger".
   PRD ref: `prd.md > What We're Building`
