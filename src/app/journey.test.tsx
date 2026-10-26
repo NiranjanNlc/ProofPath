@@ -33,9 +33,17 @@ describe('full journey', () => {
     const { pick, next } = await setup();
 
     // 1. first-try correct
+    expect(
+      screen.getByRole('img', { name: /progress map.*pick the split: you are here/i }),
+    ).toBeInTheDocument();
     await pick(/stratified k-fold/i);
     expect(screen.getByText(/right the first time/i)).toBeInTheDocument();
     await next();
+    expect(
+      screen.getByRole('img', {
+        name: /progress map.*pick the split: first try.*find the leak: you are here/i,
+      }),
+    ).toBeInTheDocument();
 
     // 2. wrong, diagnosis and hint, then corrected
     await pick(/five folds is too few/i);

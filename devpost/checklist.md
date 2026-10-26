@@ -49,7 +49,7 @@ Build mode: fast
   Learner check: Answer one challenge, close the tab, reopen it, and confirm you land where you left off. Then answer wrong once, refresh, and confirm you cannot reset the attempt.
   Commit: `Persist and restore session progress`
 
-- [ ] **5. You see a hand-drawn map showing where you are**
+- [x] **5. You see a hand-drawn map showing where you are**
   Becomes usable: A wobbly ink path with five nodes shows finished challenges stamped by outcome colour and a "you are here" marker. It is visual only.
   Why now: It's the game-feel progress layer, built once state and progress are real so it has real data to show.
   PRD ref: `prd.md > Game-feel progress path`, `prd.md > Look and Feel`

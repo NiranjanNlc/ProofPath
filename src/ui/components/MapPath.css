@@ -1,0 +1,94 @@
+.map {
+  display: block;
+  width: 100%;
+  max-width: 72rem;
+  height: auto;
+  max-height: 8.5rem;
+  margin: 0 auto var(--space-3);
+  overflow: visible;
+}
+
+.map__path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 2 9;
+  opacity: 0.45;
+}
+
+.map__path[data-walked='true'] {
+  stroke-dasharray: none;
+  opacity: 0.9;
+}
+
+.map__node {
+  fill: var(--paper-raised);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+[data-state='upcoming'] .map__node {
+  opacity: 0.55;
+}
+
+[data-state='current'] .map__node {
+  fill: var(--ochre);
+  fill-opacity: 0.35;
+  stroke-width: 3.5;
+}
+
+/* Overprinted inks: multiply so the paper shows through. */
+[data-outcome] .map__node {
+  mix-blend-mode: multiply;
+  fill-opacity: 0.85;
+}
+
+[data-outcome='first-try'] .map__node {
+  fill: var(--moss);
+}
+
+[data-outcome='corrected'] .map__node {
+  fill: var(--ochre);
+}
+
+[data-outcome='revealed'] .map__node {
+  fill: var(--madder);
+}
+
+.map__number {
+  font-family: var(--font-label);
+  font-size: 15px;
+  fill: var(--ink);
+}
+
+.map__tag,
+.map__here text {
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--ink-soft);
+}
+
+.map__here path {
+  fill: var(--madder);
+}
+
+.map__here text {
+  fill: var(--madder);
+  font-weight: 600;
+}
+
+.map__landmark path {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0.6;
+}
+
+/* Opaque paper under the inks, so the path never shows through a node. */
+.map__node-base {
+  fill: var(--paper-raised);
+}
