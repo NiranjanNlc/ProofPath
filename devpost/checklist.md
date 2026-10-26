@@ -19,7 +19,7 @@ Build mode: fast
   Learner check: Open `http://localhost:5173`. Answer challenge 1 wrong, read the diagnosis and hint, retry, then clear it and try wrong twice to see the reveal. Say whether the diagnosis explains why the wrong option was tempting.
   Commit: `Add playable surprise challenge with diagnose, hint, retry and reveal`
 
-- [ ] **2. You can play all five challenges, ending on the transfer challenge**
+- [x] **2. You can play all five challenges, ending on the transfer challenge**
   Becomes usable: Continue after each challenge through five challenges; the last is a transfer challenge with different surface details. Finishing reaches a placeholder "session finished" state.
   Why now: The full journey proves the kernel's second half (can the learner apply the idea to something new). The content is the highest risk, so it is written and reviewed now, before polish.
   PRD ref: `prd.md > Remaining challenges and transfer challenge`, `prd.md > The Core Journey`

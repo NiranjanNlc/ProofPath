@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 180" role="img" aria-label="Feature selection before the split leaks labels">
+  <g fill="none" stroke="#2b2520" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 40 L132 38 L134 140 L12 142 Z"/>
+    <path d="M200 52 L322 50 L323 128 L198 130 Z"/>
+    <path d="M394 24 L470 25 L469 70 L395 71 Z"/>
+    <path d="M394 108 L470 107 L471 154 L393 153 Z"/>
+    <path d="M134 90 L196 90 M322 90 L360 90 L360 48 L392 48 M360 90 L360 130 L392 130"/>
+    <path d="M470 48 L520 48 M470 130 L520 130" stroke-dasharray="5 6"/>
+  </g>
+  <path d="M262 128 C 262 170, 440 176, 440 156" fill="none" stroke="#b8423c" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round"/>
+  <path d="M436 160 L440 154 L446 160" fill="none" stroke="#b8423c" stroke-width="3"/>
+  <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#2b2520">
+    <text x="22" y="95">all 200</text><text x="22" y="112">patients</text>
+    <text x="210" y="86">pick top 20</text><text x="210" y="104">features</text>
+    <text x="402" y="52">train</text><text x="402" y="136">validate</text>
+    <text x="458" y="176" fill="#b8423c">labels leak</text>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 180" role="img" aria-label="100 squares, 8 red fraud, 1 caught">
+  <g stroke="#2b2520" stroke-width="1.2" fill="rgba(43,37,32,0.08)">
+    <g id="row"><rect x="20" y="14" width="26" height="26"/><rect x="50" y="14" width="26" height="26"/><rect x="80" y="14" width="26" height="26"/><rect x="110" y="14" width="26" height="26"/><rect x="140" y="14" width="26" height="26"/><rect x="170" y="14" width="26" height="26"/><rect x="200" y="14" width="26" height="26"/><rect x="230" y="14" width="26" height="26"/><rect x="260" y="14" width="26" height="26"/><rect x="290" y="14" width="26" height="26"/></g>
+    <use href="#row" y="30"/><use href="#row" y="60"/><use href="#row" y="90"/><use href="#row" y="120"/>
+  </g>
+  <g fill="#b8423c" stroke="#2b2520" stroke-width="1.2">
+    <rect x="50" y="14" width="26" height="26"/><rect x="230" y="44" width="26" height="26"/>
+    <rect x="110" y="74" width="26" height="26"/><rect x="290" y="74" width="26" height="26"/>
+    <rect x="20" y="104" width="26" height="26"/><rect x="170" y="104" width="26" height="26"/>
+    <rect x="80" y="134" width="26" height="26"/><rect x="260" y="134" width="26" height="26"/>
+  </g>
+  <circle cx="63" cy="27" r="22" fill="none" stroke="#35497a" stroke-width="3"/>
+  <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#2b2520">
+    <text x="350" y="40">each square = 10 transactions</text>
+    <text x="350" y="70" fill="#b8423c">red = fraud (8 of 100)</text>
+    <text x="350" y="100" fill="#35497a">circled = caught by the model</text>
+    <text x="350" y="130">never flag anything: 92% right</text>
+  </g>
+</svg>

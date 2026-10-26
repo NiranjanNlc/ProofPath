@@ -25,6 +25,8 @@ const challengeSchema = z.object({
   isTransfer: z.boolean(),
 });
 
+export const CHALLENGES_PER_SESSION = 5;
+
 export const topicSchema = z
   .object({
     id: z.string().min(1),
@@ -34,6 +36,17 @@ export const topicSchema = z
   })
   .superRefine((topic, ctx) => {
     const fail = (message: string) => ctx.addIssue({ code: 'custom', message });
+    if (topic.challenges.length !== CHALLENGES_PER_SESSION)
+      fail(`Expected ${CHALLENGES_PER_SESSION} challenges, found ${topic.challenges.length}`);
+    topic.challenges.forEach((c, i) => {
+      const isLast = i === topic.challenges.length - 1;
+      if (c.isTransfer !== isLast)
+        fail(`${c.id}: only the last challenge is the transfer challenge`);
+    });
+    const transfer = topic.challenges.at(-1);
+    if (transfer && !topic.challenges.slice(0, -1).some((c) => c.concept === transfer.concept))
+      fail('The transfer challenge must share a concept tag with an earlier challenge');
+
     const ids = new Set<string>();
     topic.challenges.forEach((c) => {
       if (ids.has(c.id)) fail(`Duplicate challenge id ${c.id}`);

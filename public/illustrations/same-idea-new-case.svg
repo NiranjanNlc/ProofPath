@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 180" role="img" aria-label="Same patient's scans in training and validation folds">
+  <g fill="none" stroke="#2b2520" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 20 L276 19 L277 150 L15 151 Z"/>
+    <path d="M324 21 L584 20 L585 151 L323 152 Z"/>
+  </g>
+  <g stroke="#2b2520" stroke-width="1.5">
+    <rect x="34" y="44" width="40" height="52" fill="#35497a" opacity="0.8"/><rect x="82" y="40" width="40" height="52" fill="#c58f2c" opacity="0.8"/>
+    <rect x="130" y="46" width="40" height="52" fill="#5d7a3a" opacity="0.8"/><rect x="178" y="42" width="40" height="52" fill="#35497a" opacity="0.8"/>
+    <rect x="226" y="46" width="40" height="52" fill="#b8423c" opacity="0.8"/>
+    <rect x="344" y="44" width="40" height="52" fill="#35497a" opacity="0.8"/><rect x="392" y="46" width="40" height="52" fill="#c58f2c" opacity="0.8"/>
+    <rect x="440" y="42" width="40" height="52" fill="#5d7a3a" opacity="0.8"/><rect x="488" y="45" width="40" height="52" fill="#b8423c" opacity="0.8"/>
+  </g>
+  <g fill="none" stroke="#2b2520" stroke-width="1.5" stroke-dasharray="4 5">
+    <path d="M74 70 C 200 120, 260 120, 344 74"/><path d="M122 66 C 220 126, 330 126, 392 76"/><path d="M266 72 C 300 130, 480 130, 488 72"/>
+  </g>
+  <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#2b2520">
+    <text x="22" y="14">training fold</text><text x="330" y="14">validation fold</text>
+    <text x="120" y="172">same colour = same patient, seen on both sides</text>
+  </g>
+</svg>

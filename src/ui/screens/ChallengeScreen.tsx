@@ -48,6 +48,7 @@ function ChallengeView() {
     <article className="challenge">
       <p className="label">
         Challenge {String(session.currentIndex + 1).padStart(2, '0')} · {challenge.title}
+        {challenge.isTransfer && ' · Transfer challenge'}
       </p>
       <h1>{challenge.headline}</h1>
       <p className="challenge__scenario">{challenge.scenario}</p>
