@@ -1,0 +1,51 @@
+.challenge {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+  background: var(--paper-raised);
+  border: 1.5px solid var(--ink);
+  box-shadow: var(--shadow-paper);
+}
+
+.challenge h1 {
+  margin: var(--space-2) 0 var(--space-3);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+}
+
+.challenge__scenario {
+  margin: 0 0 var(--space-4);
+}
+
+.challenge__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: var(--space-4);
+}
+
+.challenge__help {
+  margin: var(--space-3) 0 0;
+  color: var(--ink-soft);
+}
+
+.challenge__actions {
+  margin-top: var(--space-4);
+}
+
+.button {
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
