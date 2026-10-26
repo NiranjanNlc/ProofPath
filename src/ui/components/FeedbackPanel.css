@@ -32,3 +32,11 @@
 .feedback__nudge {
   font-style: italic;
 }
+
+/* Keep the live region mounted so screen readers announce changes, but invisible when empty. */
+.feedback:empty {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
