@@ -38,3 +38,7 @@ button {
   text-transform: uppercase;
   color: var(--ink-soft);
 }
+
+.page {
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}

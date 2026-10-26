@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.header__brand {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: 'WONK' 1;
+  font-size: 1.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--madder);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+@media (max-width: 40rem) {
+  .header {
+    padding: var(--space-3);
+  }
+}
